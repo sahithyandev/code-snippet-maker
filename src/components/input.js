@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet } from "react-native";
 
 const IInput = (props) => {
-    const { label, multiline, textInputStyle } = props;
+    const { label, textInputProps } = props;
     return (
         <View>
             <Text>{label}</Text>
-            <TextInput style={[style.textInput, textInputStyle]} multiline={multiline ? multiline : null} />
+            <TextInput style={[style.textInput, textInputStyle]} {...textInputProps} />
         </View>
     );
 }

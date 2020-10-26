@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         color: 'white',
-        fontWeight: "500"
-
+        fontWeight: "500",
+        fontSize: 16
     }
 });
 

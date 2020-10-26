@@ -21,8 +21,8 @@ const HomePage = ({ navigation }) => {
 	return (
 		<>
 			<StatusBar backgroundColor="black" barStyle="light-content" />
-			<SafeAreaView style={globalStyles.pageView}>
-				<ITitle>Hi</ITitle>
+			<SafeAreaView style={[style.page, globalStyles.pageView]}>
+				{/* <ITitle>Create</ITitle> */}
 
 				<IPickerInput
 					label="Language"
@@ -34,22 +34,28 @@ const HomePage = ({ navigation }) => {
 					availableValues={AVAILABLE.themes}
 				/> */}
 
-				<IInput label="Code" multiline={true}
+				<IInput label="Code"
+					textInputProps={{ multiline: true, numberOfLines: 5 }}
 					textInputStyle={{ marginBottom: 20 }}
 				/>
 
 				{/* <Text>Code</Text>
 				<TextInput style={style.textInput} autoCapitalize="none" spellCheck={false} multiline={true} /> */}
 
-				<IButton onPress={() => {
-					navigation.navigate('Result', { code: "const foo = () => 'bar'" })
-				}}>Get Results</IButton>
+				<IButton
+					onPress={() => {
+						navigation.navigate('Result', { code: "const foo = () => 'bar'" })
+					}}
+				>Render Button</IButton>
 			</SafeAreaView>
 		</>
 	);
 };
 
 const style = StyleSheet.create({
+	page: {
+		marginTop: 60 // temporary
+	},
 	textInput: {
 		borderStyle: 'solid',
 		borderWidth: 1,
