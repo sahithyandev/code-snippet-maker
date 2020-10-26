@@ -12,6 +12,7 @@ const IPickerInput = (props) => {
                 style={style.picker}
                 {...pickerProps}
             >
+                <Picker.Item key='null' label="Select" value={null} />
                 {availableValues.map(value => {
                     return <Picker.Item key={value} label={value} value={value} />
                 })}

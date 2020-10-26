@@ -13,7 +13,7 @@ const AVAILABLE = {
 
 const HomePage = ({ navigation }) => {
 	let [language, setLanguage] = useState('javascript');
-	let [themeName, setThemeName] = useState('agate');
+	let [themeName, setThemeName] = useState('Agate');
 	let [codeText, setCodeText] = useState(`
 let x = 10;
 
@@ -32,7 +32,7 @@ function ted() {
 					label="Language"
 					availableValues={AVAILABLE.languages.map(lang => lang.displayName).sort()}
 					pickerProps={{
-						selectedValue: findLang('languageName', language).displayName,
+						selectedValue: language == '' ? null : findLang('languageName', language).displayName,
 						onValueChange: v => {
 							setLanguage(findLang('displayName', v).languageName)
 						}
