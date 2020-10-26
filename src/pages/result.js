@@ -6,7 +6,19 @@ import { spacedToCamelCase } from "./../utils";
 import { IButton } from '../components';
 
 const ResultPage = ({ navigation, route }) => {
-  const { language, codeText, themeName } = route.params;
+  let { language, codeText, themeName } = route.params;
+  console.log(language)
+  if (language == 'c#') {
+    language = 'csharp'
+  } else if (language == 'c++') {
+    language = 'cpp'
+  } else if (language == 'f#') {
+    language = 'fsharp'
+  } else if (language == 'G-code') {
+    language = 'gcode'
+  } else if (language == "Objective-C") {
+    language = 'objectivec'
+  }
   const theme = CODE_STYLES[spacedToCamelCase(themeName)];
 
   const getBackgroundColor = () => {
@@ -32,6 +44,8 @@ const ResultPage = ({ navigation, route }) => {
             {codeText}
           </SyntaxHighlighter>
         </View>
+
+        {/* TK Add a slider for fontSize here */}
 
         <IButton containerStyle={{ marginBottom: 20 }} >Save</IButton>
       </SafeAreaView>

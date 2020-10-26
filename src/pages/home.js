@@ -2,18 +2,12 @@ import React, { useState } from "react";
 import { Text, Button, SafeAreaView, StatusBar, TextInput, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 
-import { globalStyles, CODE_STYLES } from '../global';
+import { globalStyles, CODE_STYLES, AVAILABLE_LANGUAGES } from '../global';
 import { IButton, ITitle, IInput, IPickerInput } from "./../components/";
 import { camelCaseToSpaced } from "./../utils";
 
 const AVAILABLE = {
-	languages: [
-		"JavaScript",
-		'Java',
-		"Python",
-		"C",
-		"TypeScript"
-	],
+	languages: AVAILABLE_LANGUAGES,
 	themes: Object.keys(CODE_STYLES).map(camelCaseToSpaced)
 }
 
@@ -36,7 +30,7 @@ function () {
 
 				<IPickerInput
 					label="Language"
-					availableValues={AVAILABLE.languages}
+					availableValues={AVAILABLE.languages.sort()}
 					pickerProps={{
 						selectedValue: language,
 						onValueChange: setLanguage
