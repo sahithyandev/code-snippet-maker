@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 
 const IButton = (props) => {
-    const { children, onPress } = props;
+    const { children, onPress, containerStyle } = props;
     return (
         <TouchableWithoutFeedback onPress={onPress}>
-            <View style={styles.container}>
+            <View style={[styles.container, containerStyle]}>
                 <Text style={styles.textStyle}>{children}</Text>
             </View>
         </TouchableWithoutFeedback>

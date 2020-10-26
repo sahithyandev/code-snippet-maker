@@ -1,26 +1,51 @@
 import React from 'react';
-import { StatusBar, SafeAreaView } from 'react-native';
+import { StatusBar, View, SafeAreaView, StyleSheet } from 'react-native';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/styles/hljs';
-import { globalStyles } from './global';
+import { globalStyles, CODE_STYLES } from '../global';
+import { spacedToCamelCase } from "./../utils";
+import { IButton } from '../components';
 
 const ResultPage = ({ navigation, route }) => {
-  const codeString = route.params.code || '';
+  const { language, codeText, themeName } = route.params;
+  const theme = CODE_STYLES[spacedToCamelCase(themeName)];
+
+  const getBackgroundColor = () => {
+    if (theme.themeLibrary == 'hljs') {
+      return theme.hljs.background;
+    } else if (theme.themeLibrary == 'prism') {
+      // TK
+      return null;// for now // theme['.style .token.string'].background;
+    } else {
+      throw "themeLibrary not recognized";
+    }
+  }
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={globalStyles.pageView}>
+      <StatusBar barStyle="light-content" />
+      <SafeAreaView style={[globalStyles.pageView, { flex: 1, backgroundColor: getBackgroundColor() }]}>
+        <View style={style.syntaxHighlighterContainer}>
+          <SyntaxHighlighter
+            language={language}
+            style={theme}
+            highlighter={theme.themeLibrary}>
+            {codeText}
+          </SyntaxHighlighter>
+        </View>
 
-        <SyntaxHighlighter
-          language="javascript"
-          style={atomOneDark}
-          highlighter="hljs">
-          {codeString}
-        </SyntaxHighlighter>
+        <IButton containerStyle={{ marginBottom: 20 }} >Save</IButton>
       </SafeAreaView>
     </>
   );
 };
+
+const style = StyleSheet.create({
+  syntaxHighlighterContainer: {
+    minHeight: 200,
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row'
+  }
+})
 
 export default ResultPage;

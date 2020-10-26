@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet } from "react-native";
 
 const IInput = (props) => {
-    const { label, textInputProps } = props;
+    const { label, textInputStyle, textInputProps } = props;
     return (
         <View>
             <Text>{label}</Text>
@@ -13,8 +13,7 @@ const IInput = (props) => {
 
 const style = StyleSheet.create({
     textInput: {
-        marginTop: 10,
-        backgroundColor: 'red'
+        marginTop: 10
     }
 })
 

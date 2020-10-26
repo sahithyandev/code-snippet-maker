@@ -3,11 +3,14 @@ import { View, Text, StyleSheet } from "react-native";
 import { Picker } from '@react-native-community/picker';
 
 const IPickerInput = (props) => {
-    const { label, availableValues } = props;
+    const { label, availableValues, pickerProps } = props;
     return (
         <View>
             <Text>{label}</Text>
-            <Picker style={style.picker}>
+            <Picker
+                style={style.picker}
+                {...pickerProps}
+            >
                 {availableValues.map(lang => {
                     return <Picker.Item key={lang} label={lang} value={lang.toLowerCase()} />
                 })}

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Text, Button, SafeAreaView, StatusBar, TextInput, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 
-import { globalStyles } from "./global";
+import { globalStyles, CODE_STYLES } from '../global';
 import { IButton, ITitle, IInput, IPickerInput } from "./../components/";
+import { camelCaseToSpaced } from "./../utils";
 
 const AVAILABLE = {
 	languages: [
@@ -13,10 +14,19 @@ const AVAILABLE = {
 		"C",
 		"TypeScript"
 	],
-	themes: []
+	themes: Object.keys(CODE_STYLES).map(camelCaseToSpaced)
 }
 
 const HomePage = ({ navigation }) => {
+	let [language, setLanguage] = useState('javascript');
+	let [themeName, setThemeName] = useState('agate');
+	let [codeText, setCodeText] = useState(`
+let x = 10;
+
+function () {
+	x = 20;
+	console.log(x);
+}`);
 
 	return (
 		<>
@@ -27,15 +37,28 @@ const HomePage = ({ navigation }) => {
 				<IPickerInput
 					label="Language"
 					availableValues={AVAILABLE.languages}
+					pickerProps={{
+						selectedValue: language,
+						onValueChange: setLanguage
+					}}
 				/>
 
-				{/* <IPickerInput
+				<IPickerInput
 					label="Theme"
 					availableValues={AVAILABLE.themes}
-				/> */}
+					pickerProps={{
+						selectedValue: themeName,
+						onValueChange: setThemeName
+					}}
+				/>
 
 				<IInput label="Code"
-					textInputProps={{ multiline: true, numberOfLines: 5 }}
+					textInputProps={{
+						multiline: true,
+						numberOfLines: 10,
+						value: codeText,
+						onChangeText: setCodeText
+					}}
 					textInputStyle={{ marginBottom: 20 }}
 				/>
 
@@ -44,9 +67,9 @@ const HomePage = ({ navigation }) => {
 
 				<IButton
 					onPress={() => {
-						navigation.navigate('Result', { code: "const foo = () => 'bar'" })
+						navigation.navigate('Result', { language, themeName, codeText })
 					}}
-				>Render Button</IButton>
+				>Render Snippet</IButton>
 			</SafeAreaView>
 		</>
 	);
