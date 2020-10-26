@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, Button, SafeAreaView, StatusBar, TextInput, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 
-import { globalStyles, CODE_STYLES, AVAILABLE_LANGUAGES } from '../global';
+import { globalStyles, CODE_STYLES, AVAILABLE_LANGUAGES, findLang } from '../global';
 import { IButton, ITitle, IInput, IPickerInput } from "./../components/";
 import { camelCaseToSpaced } from "./../utils";
 
@@ -17,7 +17,7 @@ const HomePage = ({ navigation }) => {
 	let [codeText, setCodeText] = useState(`
 let x = 10;
 
-function () {
+function ted() {
 	x = 20;
 	console.log(x);
 }`);
@@ -30,10 +30,12 @@ function () {
 
 				<IPickerInput
 					label="Language"
-					availableValues={AVAILABLE.languages.sort()}
+					availableValues={AVAILABLE.languages.map(lang => lang.displayName).sort()}
 					pickerProps={{
-						selectedValue: language,
-						onValueChange: setLanguage
+						selectedValue: findLang('languageName', language).displayName,
+						onValueChange: v => {
+							setLanguage(findLang('displayName', v).languageName)
+						}
 					}}
 				/>
 

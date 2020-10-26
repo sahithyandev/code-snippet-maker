@@ -7,18 +7,7 @@ import { IButton } from '../components';
 
 const ResultPage = ({ navigation, route }) => {
   let { language, codeText, themeName } = route.params;
-  console.log(language)
-  if (language == 'c#') {
-    language = 'csharp'
-  } else if (language == 'c++') {
-    language = 'cpp'
-  } else if (language == 'f#') {
-    language = 'fsharp'
-  } else if (language == 'G-code') {
-    language = 'gcode'
-  } else if (language == "Objective-C") {
-    language = 'objectivec'
-  }
+
   const theme = CODE_STYLES[spacedToCamelCase(themeName)];
 
   const getBackgroundColor = () => {
@@ -40,6 +29,7 @@ const ResultPage = ({ navigation, route }) => {
           <SyntaxHighlighter
             language={language}
             style={theme}
+            fontSize={16}
             highlighter={theme.themeLibrary}>
             {codeText}
           </SyntaxHighlighter>
