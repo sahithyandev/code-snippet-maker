@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from "react-native";
+import { ILabel } from "./index";
 
 const IInput = (props) => {
     const { label, textInputStyle, textInputProps } = props;
     return (
         <View>
-            <Text>{label}</Text>
+            <ILabel>{label}</ILabel>
             <TextInput style={[style.textInput, textInputStyle]} {...textInputProps} />
         </View>
     );

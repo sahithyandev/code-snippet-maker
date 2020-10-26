@@ -1,18 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet } from "react-native";
 import { Picker } from '@react-native-community/picker';
+import { ILabel } from './index'
 
 const IPickerInput = (props) => {
     const { label, availableValues, pickerProps } = props;
     return (
         <View>
-            <Text>{label}</Text>
+            <ILabel>{label}</ILabel>
             <Picker
                 style={style.picker}
                 {...pickerProps}
             >
-                {availableValues.map(lang => {
-                    return <Picker.Item key={lang} label={lang} value={lang.toLowerCase()} />
+                {availableValues.map(value => {
+                    return <Picker.Item key={value} label={value} value={value} />
                 })}
             </Picker>
         </View>
