@@ -11,7 +11,7 @@ import { IButton, ITitle, IInput, IPickerInput } from "./../components/"
 
 const HomePage = ({ navigation }) => {
 	let [language, setLanguage] = useState("javascript")
-	let [themeName, setThemeName] = useState("Agate")
+	// let [themeName, setThemeName] = useState("Agate")
 	let [codeText, setCodeText] = useState(`
 let x = 10;
 
@@ -24,7 +24,7 @@ function ted() {
 		<>
 			<StatusBar backgroundColor="black" barStyle="light-content" />
 			<SafeAreaView style={[style.page, globalStyles.pageView]}>
-				{/* <ITitle>Create</ITitle> */}
+				<ITitle>Create Snippet</ITitle>
 
 				<IPickerInput
 					label="Language"
@@ -37,14 +37,14 @@ function ted() {
 					}}
 				/>
 
-				<IPickerInput
+				{/* <IPickerInput
 					label="Theme"
 					availableValues={AVAILABLE.themes}
 					pickerProps={{
 						selectedValue: themeName,
 						onValueChange: setThemeName,
 					}}
-				/>
+				/> */}
 
 				<IInput
 					label="Code"
@@ -53,6 +53,9 @@ function ted() {
 						numberOfLines: 10,
 						value: codeText,
 						onChangeText: setCodeText,
+						fontFamily: "monospace",
+						borderWidth: 1,
+						paddingHorizontal: 10,
 					}}
 					textInputStyle={{ marginBottom: 20 }}
 				/>
@@ -62,7 +65,7 @@ function ted() {
 
 				<IButton
 					onPress={() => {
-						navigation.navigate("Result", { language, themeName, codeText })
+						navigation.navigate("Result", { language, codeText })
 					}}>
 					Render Snippet
 				</IButton>
@@ -73,7 +76,7 @@ function ted() {
 
 const style = StyleSheet.create({
 	page: {
-		marginTop: 60, // temporary
+		marginTop: 20, // temporary
 	},
 	textInput: {
 		borderStyle: "solid",

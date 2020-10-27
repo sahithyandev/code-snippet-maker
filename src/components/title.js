@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 		fontFamily: "Roboto",
 		fontSize: 36,
 		marginTop: 10,
-		marginBottom: 20,
+		marginBottom: 32,
 		fontWeight: "700",
 	},
 })

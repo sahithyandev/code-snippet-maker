@@ -18,11 +18,7 @@ const IPickerInput = (props) => {
 	)
 }
 const style = StyleSheet.create({
-	picker: {
-		borderColor: "black",
-		borderWidth: 1,
-		borderStyle: "solid",
-	},
+	picker: {},
 })
 
 export default IPickerInput
