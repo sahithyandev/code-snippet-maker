@@ -5,8 +5,8 @@ import { StyleSheet } from "react-native"
 export const globalStyles = StyleSheet.create({
 	pageView: {
 		flex: 1,
-		paddingHorizontal: 12,
-	},
+		paddingHorizontal: 12
+	}
 })
 
 // available CODE_STYLES
@@ -19,11 +19,10 @@ const formatStyles = (styles, themeLibrary) => {
 		let thisStyle = {
 			[current[0]]: {
 				themeLibrary,
-				...current[1],
-			},
+				...current[1]
+			}
 		}
 
-		if (current[0] === "coy") return; // Coy is generating some errors
 		return { ...prev, ...thisStyle }
 	}, {})
 }
@@ -31,8 +30,8 @@ const formatStyles = (styles, themeLibrary) => {
 let hljsStyles = formatStyles(_hljsStyles, "hljs")
 let prismStyles = formatStyles(_prismStyles, "prism")
 
-// Not sure if all prism themes will work.
-export const CODE_STYLES = { ...hljsStyles, ...prismStyles }
+// [Some] Prism styles are making some errors
+export const CODE_STYLES = { ...hljsStyles } // , ...prismStyles }
 
 // Available Languages & Themes
 export const AVAILABLE = {
@@ -143,9 +142,9 @@ export const AVAILABLE = {
 		{ displayName: "VHDL", languageName: "vhdl" },
 		{ displayName: "Vim", languageName: "vim" },
 		{ displayName: "XQuery", languageName: "xquery" },
-		{ displayName: "YAML", languageName: "yaml" },
+		{ displayName: "YAML", languageName: "yaml" }
 	],
-	themes: Object.keys(CODE_STYLES).map(camelCaseToSpaced),
+	themes: Object.keys(CODE_STYLES).map(camelCaseToSpaced)
 }
 
 export const findLang = (property, value) => {

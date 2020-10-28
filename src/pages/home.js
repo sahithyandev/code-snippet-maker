@@ -6,7 +6,6 @@ import { IButton, ITitle, IInput, IPickerInput } from "./../components/"
 
 const HomePage = ({ navigation }) => {
 	let [language, setLanguage] = useState("javascript")
-	// let [themeName, setThemeName] = useState("Agate")
 	let [codeText, setCodeText] = useState(`
 let x = 10;
 
@@ -30,18 +29,9 @@ function ted() {
 						selectedValue: language === "" ? null : findLang("languageName", language).displayName,
 						onValueChange: (v) => {
 							setLanguage(findLang("displayName", v).languageName)
-						},
+						}
 					}}
 				/>
-
-				{/* <IPickerInput
-					label="Theme"
-					availableValues={AVAILABLE.themes}
-					pickerProps={{
-						selectedValue: themeName,
-						onValueChange: setThemeName,
-					}}
-				/> */}
 
 				<IInput
 					label="Code"
@@ -52,7 +42,7 @@ function ted() {
 						onChangeText: setCodeText,
 						fontFamily: "monospace",
 						borderWidth: 1,
-						paddingHorizontal: 10,
+						paddingHorizontal: 10
 					}}
 					textInputStyle={{ marginBottom: 20 }}
 				/>
@@ -73,15 +63,15 @@ function ted() {
 
 const style = StyleSheet.create({
 	page: {
-		marginTop: 20, // temporary
+		marginTop: 20 // temporary
 	},
 	textInput: {
 		borderStyle: "solid",
 		borderWidth: 1,
 		borderColor: "black",
 		borderRadius: 4,
-		marginBottom: 10,
-	},
+		marginBottom: 10
+	}
 })
 
 export default HomePage
