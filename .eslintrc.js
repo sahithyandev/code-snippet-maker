@@ -3,6 +3,7 @@ module.exports = {
   extends: '@react-native-community',
   rules: {
     quotes: ["error", "double"],
-    semi: ["error", "never"]
+    semi: ["error", "never"],
+    "comma-dangle": ["error", "never"]
   }
 };
