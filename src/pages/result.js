@@ -1,5 +1,13 @@
 import React, { useState, useRef } from "react"
-import { StatusBar, View, SafeAreaView, StyleSheet, PermissionsAndroid, Alert, Platform } from "react-native"
+import {
+	StatusBar,
+	View,
+	SafeAreaView,
+	StyleSheet,
+	PermissionsAndroid,
+	Alert,
+	Platform
+} from "react-native"
 import SyntaxHighlighter from "react-native-syntax-highlighter"
 
 import { captureRef } from "react-native-view-shot"
@@ -8,7 +16,7 @@ import CameraRoll from "@react-native-community/cameraroll"
 import { globalStyles, CODE_STYLES, AVAILABLE } from "../global"
 import { spacedToCamelCase } from "./../utils"
 import { IButton, IPickerInput, IPureButton } from "../components"
-import { Icon } from "react-native-vector-icons/Icon"
+import { Icon } from "react-native-elements"
 
 const ResultPage = ({ navigation, route }) => {
 	let { language, codeText } = route.params
@@ -30,54 +38,90 @@ const ResultPage = ({ navigation, route }) => {
 	}
 
 	// on Android
-	const getPermissionAndroid = async () => {
+	const getPermissionAndroid = async (permission) => {
+		if (permission === undefined) {
+			throw "permission can't be undefined"
+		}
+		// const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
 		try {
-			const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE, {
+			const hasPermission = await PermissionsAndroid.check(permission)
+			if (hasPermission) {
+				console.log("Already has permission")
+				return true
+			}
+			const granted = await PermissionsAndroid.request(permission, {
 				title: "Image Download Permission",
 				message: "Your permission is required to save images to your device",
 				buttonNegative: "Cancel",
 				buttonPositive: "OK"
 			})
 			if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+				console.log("WRITE PERMISSION GRANTED")
 				return true
 			}
 
-			Alert.alert("", "Image can't be stored without your permission", [{ text: "OK", onPress: () => {} }], {
-				cancelable: false
-			})
+			Alert.alert(
+				"",
+				"Image can't be stored without your permission",
+				[{ text: "OK", onPress: () => {} }],
+				{
+					cancelable: false
+				}
+			)
 		} catch (error) {
 			console.warn("error", error)
 		}
 	}
 
 	const downloadImage = async () => {
+		console.log(codeComponentRef.current)
 		try {
-			const uri = await captureRef(codeComponentRef, {
-				format: "png",
-				quality: 0.8
-			})
+			console.log("downloadImage called")
+			const uri = await captureRef(codeComponentRef)
+			console.log("uri", uri)
 			if (Platform.OS === "android") {
-				const granted = await getPermissionAndroid()
-				if (!granted) {
+				console.log("android")
+				const writeGranted = await getPermissionAndroid(
+					PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
+				)
+				if (!writeGranted) {
 					return
 				}
 			}
 
 			// save image
-			const image = CameraRoll.save(uri, "photo")
-			if (image) {
-				Alert.alert("", "Image saved successfully", [{ text: "OK", onPress: () => {} }], { cancelable: false })
-			}
+
+			CameraRoll.save(uri)
+				.then((result) => {
+					console.log("r", result)
+				})
+				.catch((e) => {
+					console.log("e")
+					console.warn(e)
+				})
+			// const image = await CameraRoll.save(uri)
+			// console.log("saved", image)
+			// if (image) {
+			// 	Alert.alert("", "Image saved successfully", [{ text: "OK", onPress: () => {} }], {
+			// 		cancelable: false
+			// 	})
+			// }
+			// console.log("end")
 		} catch (error) {
-			console.warn("error downloading", error)
+			console.warn(error)
 		}
 	}
 
 	return (
 		<>
 			<StatusBar barStyle="light-content" />
-			<SafeAreaView style={[globalStyles.pageView, style.safeArea, { backgroundColor: getBackgroundColor(themeName) }]}>
-				<View ref={codeComponentRef} style={style.syntaxHighlighterContainer}>
+			<SafeAreaView
+				style={[
+					globalStyles.pageView,
+					style.safeArea,
+					{ backgroundColor: getBackgroundColor(themeName) }
+				]}>
+				<View style={style.syntaxHighlighterContainer} ref={codeComponentRef} collapsable={false}>
 					<SyntaxHighlighter
 						language={language}
 						style={CODE_STYLES[spacedToCamelCase(themeName)]}
