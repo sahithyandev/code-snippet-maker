@@ -22,6 +22,8 @@ const formatStyles = (styles, themeLibrary) => {
 				...current[1],
 			},
 		}
+
+		if (current[0] === "coy") return; // Coy is generating some errors
 		return { ...prev, ...thisStyle }
 	}, {})
 }
@@ -29,7 +31,8 @@ const formatStyles = (styles, themeLibrary) => {
 let hljsStyles = formatStyles(_hljsStyles, "hljs")
 let prismStyles = formatStyles(_prismStyles, "prism")
 
-const CODE_STYLES = { ...hljsStyles, ...prismStyles }
+// Not sure if all prism themes will work.
+export const CODE_STYLES = { ...hljsStyles, ...prismStyles }
 
 // Available Languages & Themes
 export const AVAILABLE = {

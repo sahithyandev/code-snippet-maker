@@ -1,13 +1,8 @@
 import React, { useState } from "react"
 import { SafeAreaView, StatusBar, StyleSheet } from "react-native"
 
-import { globalStyles, CODE_STYLES, AVAILABLE, findLang } from "../global"
+import { globalStyles, AVAILABLE, findLang } from "../global"
 import { IButton, ITitle, IInput, IPickerInput } from "./../components/"
-
-// const AVAILABLE = {
-// 	languages: AVAILABLE_LANGUAGES,
-// 	themes: Object.keys(CODE_STYLES).map(camelCaseToSpaced),
-// }
 
 const HomePage = ({ navigation }) => {
 	let [language, setLanguage] = useState("javascript")
@@ -18,7 +13,9 @@ let x = 10;
 function ted() {
 	x = 20;
 	console.log(x);
-}`)
+}
+// Made by Sahithyan
+// with SnapCODE`)
 
 	return (
 		<>

@@ -7,7 +7,7 @@ import { IButton, IPickerInput } from "../components"
 
 const ResultPage = ({ navigation, route }) => {
 	let { language, codeText } = route.params
-	let [themeName, setThemeName] = useState("Agate")
+	let [themeName, setThemeName] = useState("Zenburn");
 
 	const theme = CODE_STYLES[spacedToCamelCase(themeName)]
 
@@ -17,7 +17,10 @@ const ResultPage = ({ navigation, route }) => {
 			return _theme.hljs.background
 		} else if (_theme.themeLibrary === "prism") {
 			// TK
-			return null // for now // theme['.style .token.string'].background;
+			// Prism themes doesn't support backgroundColors. So it will be a default color.
+			return "#101010"
+			// console.log(theme["pre[class*=\"language-\"]"])
+			// return theme["pre[class*=\"language-\"]"].background
 		} else {
 			throw "themeLibrary not recognized"
 		}
