@@ -42,7 +42,8 @@ function ted() {
 						onChangeText: setCodeText,
 						fontFamily: "monospace",
 						borderWidth: 1,
-						paddingHorizontal: 10
+						paddingHorizontal: 10,
+						autoCapitalize: "none"
 					}}
 					textInputStyle={style.textInput}
 				/>

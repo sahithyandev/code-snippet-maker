@@ -2,11 +2,17 @@ import React from "react"
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 
 const IButton = (props) => {
-	const { children, onPress, containerStyle } = props
+	let { children, onPress, containerStyle, type } = props
+	if (type === undefined) {
+		type = "normal"
+	}
+	console.log(type)
+	// I know, the values for type are not self explanatory
 	return (
 		<TouchableOpacity onPress={onPress}>
 			<View style={[styles.container, containerStyle]}>
-				<Text style={styles.textStyle}>{children}</Text>
+				{type === "normal" ? <Text style={styles.textStyle}>{children}</Text> : null}
+				{type === "abstract" ? children : null}
 			</View>
 		</TouchableOpacity>
 	)
@@ -19,7 +25,8 @@ const styles = StyleSheet.create({
 		paddingVertical: 12,
 		paddingHorizontal: 10,
 		justifyContent: "center",
-		flexDirection: "row"
+		flexDirection: "row",
+		alignItems: "center"
 	},
 	textStyle: {
 		color: "white",

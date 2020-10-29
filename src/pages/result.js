@@ -1,14 +1,18 @@
 import React, { useState, useRef } from "react"
+
 import {
 	StatusBar,
-	View,
 	SafeAreaView,
+	View,
+	Text,
 	StyleSheet,
 	PermissionsAndroid,
 	Alert,
 	Platform
 } from "react-native"
+
 import SyntaxHighlighter from "react-native-syntax-highlighter"
+import { Icon } from "react-native-elements"
 
 import { captureRef } from "react-native-view-shot"
 import CameraRoll from "@react-native-community/cameraroll"
@@ -16,7 +20,6 @@ import CameraRoll from "@react-native-community/cameraroll"
 import { globalStyles, CODE_STYLES, AVAILABLE } from "../global"
 import { spacedToCamelCase } from "./../utils"
 import { IButton, IPickerInput, IPureButton } from "../components"
-import { Icon } from "react-native-elements"
 
 const ResultPage = ({ navigation, route }) => {
 	let { language, codeText } = route.params
@@ -37,7 +40,6 @@ const ResultPage = ({ navigation, route }) => {
 		}
 	}
 
-	// on Android
 	const getPermissionAndroid = async (permission) => {
 		if (permission === undefined) {
 			throw "permission can't be undefined"
@@ -130,9 +132,16 @@ const ResultPage = ({ navigation, route }) => {
 				</View>
 
 				<View style={style.controlContainer}>
-					<IPureButton style={style.goBackButton}>
-						<Icon name="west" />
-					</IPureButton>
+					<Icon
+						iconStyle={style.icon}
+						name="arrow-left"
+						type="font-awesome-5"
+						containerStyle={style.gobackContainer}
+						onPress={() => {
+							console.log("go-back")
+							// TK Go back here
+						}}
+					/>
 
 					{/* TK Add an option to select fontSize */}
 					<IPickerInput
@@ -142,10 +151,18 @@ const ResultPage = ({ navigation, route }) => {
 							selectedValue: themeName,
 							onValueChange: setThemeName
 						}}
+						disableDefault={true}
 					/>
 
-					<IButton containerStyle={style.saveButton} onPress={downloadImage}>
-						Save
+					<IButton containerStyle={style.saveButton} type="abstract" onPress={downloadImage}>
+						<Icon
+							name="file-download"
+							type="font-awesome-5"
+							color="white"
+							iconStyle={style.icon}
+							containerStyle={style.saveIconContainer}
+						/>
+						<Text style={style.buttonTextStyle}>Save</Text>
 					</IButton>
 				</View>
 			</SafeAreaView>
@@ -172,8 +189,25 @@ const style = StyleSheet.create({
 		backgroundColor: "white",
 		flexDirection: "column"
 	},
-	saveButton: {
+	gobackContainer: {
+		alignSelf: "flex-start",
 		marginBottom: 20
+	},
+	icon: {
+		fontSize: 20
+	},
+	saveButton: {
+		marginBottom: 20,
+		flexDirection: "row",
+		alignItems: "center"
+	},
+	saveIconContainer: {
+		marginRight: 10
+	},
+	buttonTextStyle: {
+		color: "white",
+		fontWeight: "500",
+		fontSize: 16
 	}
 })
 
