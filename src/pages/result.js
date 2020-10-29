@@ -19,7 +19,7 @@ import CameraRoll from "@react-native-community/cameraroll"
 
 import { globalStyles, CODE_STYLES, AVAILABLE } from "../global"
 import { spacedToCamelCase } from "./../utils"
-import { IButton, IPickerInput, IPureButton } from "../components"
+import { IButton, IPickerInput } from "../components"
 
 const ResultPage = ({ navigation, route }) => {
 	let { language, codeText } = route.params
