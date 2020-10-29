@@ -12,7 +12,7 @@ export const globalStyles = StyleSheet.create({
 // available CODE_STYLES
 
 import * as _hljsStyles from "react-syntax-highlighter/styles/hljs"
-import * as _prismStyles from "react-syntax-highlighter/styles/prism"
+// import * as _prismStyles from "react-syntax-highlighter/styles/prism"
 
 const formatStyles = (styles, themeLibrary) => {
 	return Object.entries(styles).reduce((prev, current) => {
@@ -28,7 +28,7 @@ const formatStyles = (styles, themeLibrary) => {
 }
 
 let hljsStyles = formatStyles(_hljsStyles, "hljs")
-let prismStyles = formatStyles(_prismStyles, "prism")
+// let prismStyles = formatStyles(_prismStyles, "prism")
 
 // [Some] Prism styles are making some errors
 export const CODE_STYLES = { ...hljsStyles } // , ...prismStyles }

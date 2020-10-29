@@ -7,15 +7,19 @@ const IInput = (props) => {
 	return (
 		<View>
 			<ILabel>{label}</ILabel>
-			<TextInput textAlignVertical="top" style={[style.textInput, textInputStyle]} {...textInputProps} />
+			<TextInput
+				textAlignVertical="top"
+				style={[style.textInput, textInputStyle]}
+				{...textInputProps}
+			/>
 		</View>
 	)
 }
 
 const style = StyleSheet.create({
 	textInput: {
-		marginTop: 10,
-	},
+		marginTop: 10
+	}
 })
 
 export default IInput

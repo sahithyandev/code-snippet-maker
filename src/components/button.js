@@ -19,13 +19,13 @@ const styles = StyleSheet.create({
 		paddingVertical: 12,
 		paddingHorizontal: 10,
 		justifyContent: "center",
-		flexDirection: "row",
+		flexDirection: "row"
 	},
 	textStyle: {
 		color: "white",
 		fontWeight: "500",
-		fontSize: 16,
-	},
+		fontSize: 16
+	}
 })
 
 export default IButton

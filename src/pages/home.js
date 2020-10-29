@@ -44,7 +44,7 @@ function ted() {
 						borderWidth: 1,
 						paddingHorizontal: 10
 					}}
-					textInputStyle={{ marginBottom: 20 }}
+					textInputStyle={style.textInput}
 				/>
 
 				{/* <Text>Code</Text>
@@ -66,11 +66,7 @@ const style = StyleSheet.create({
 		marginTop: 20 // temporary
 	},
 	textInput: {
-		borderStyle: "solid",
-		borderWidth: 1,
-		borderColor: "black",
-		borderRadius: 4,
-		marginBottom: 10
+		marginBottom: 20
 	}
 })
 

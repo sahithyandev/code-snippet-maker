@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
 		fontSize: 36,
 		marginTop: 10,
 		marginBottom: 32,
-		fontWeight: "700",
-	},
+		fontWeight: "700"
+	}
 })
 
 export default ITitle
