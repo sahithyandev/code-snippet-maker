@@ -74,13 +74,9 @@ const ResultPage = ({ navigation, route }) => {
 	}
 
 	const downloadImage = async () => {
-		console.log(codeComponentRef.current)
 		try {
-			console.log("downloadImage called")
 			const uri = await captureRef(codeComponentRef)
-			console.log("uri", uri)
 			if (Platform.OS === "android") {
-				console.log("android")
 				const writeGranted = await getPermissionAndroid(
 					PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
 				)
@@ -91,12 +87,14 @@ const ResultPage = ({ navigation, route }) => {
 
 			// save image
 
-			CameraRoll.save(uri)
+			CameraRoll.save(uri, {
+				album: "SnapCODE",
+				type: "photo"
+			})
 				.then((result) => {
 					console.log("r", result)
 				})
 				.catch((e) => {
-					console.log("e")
 					console.warn(e)
 				})
 			// const image = await CameraRoll.save(uri)
@@ -112,28 +110,28 @@ const ResultPage = ({ navigation, route }) => {
 		}
 	}
 
+	let bg = getBackgroundColor(themeName)
 	return (
 		<>
 			<StatusBar barStyle="light-content" />
-			<SafeAreaView
-				style={[
-					globalStyles.pageView,
-					style.safeArea,
-					{ backgroundColor: getBackgroundColor(themeName) }
-				]}>
-				<View style={style.syntaxHighlighterContainer} ref={codeComponentRef} collapsable={false}>
-					<SyntaxHighlighter
-						language={language}
-						style={CODE_STYLES[spacedToCamelCase(themeName)]}
-						fontSize={16}
-						highlighter={theme.themeLibrary}>
-						{codeText}
-					</SyntaxHighlighter>
+			<SafeAreaView style={[globalStyles.pageView, style.safeArea, { backgroundColor: bg }]}>
+				<View style={style.syntaxHighlighterContainer} collapsable={false}>
+					<View
+						ref={codeComponentRef}
+						style={[style.syntaxHighlighterContainerInner, { backgroundColor: bg }]}>
+						<SyntaxHighlighter
+							language={language}
+							style={CODE_STYLES[spacedToCamelCase(themeName)]}
+							fontSize={16}
+							highlighter={theme.themeLibrary}>
+							{codeText}
+						</SyntaxHighlighter>
+					</View>
 				</View>
 
 				<View style={style.controlContainer}>
-					<IPureButton>
-						<Icon name="chevron-back" type="ionicon" />
+					<IPureButton style={style.goBackButton}>
+						<Icon name="west" />
 					</IPureButton>
 
 					{/* TK Add an option to select fontSize */}
@@ -162,12 +160,17 @@ const style = StyleSheet.create({
 	syntaxHighlighterContainer: {
 		minHeight: 200,
 		flex: 1,
-		alignItems: "center",
-		flexDirection: "row"
+		justifyContent: "center",
+		flexDirection: "column"
+	},
+	syntaxHighlighterContainerInner: {
+		paddingVertical: 40,
+		paddingHorizontal: 12
 	},
 	controlContainer: {
 		padding: 20,
-		backgroundColor: "white"
+		backgroundColor: "white",
+		flexDirection: "column"
 	},
 	saveButton: {
 		marginBottom: 20
