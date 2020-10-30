@@ -4,7 +4,6 @@ import {
 	StatusBar,
 	SafeAreaView,
 	View,
-	Text,
 	StyleSheet,
 	PermissionsAndroid,
 	Alert,
@@ -19,7 +18,7 @@ import CameraRoll from "@react-native-community/cameraroll"
 
 import { globalStyles, CODE_STYLES, AVAILABLE } from "../global"
 import { spacedToCamelCase } from "./../utils"
-import { IButton, IPickerInput } from "../components"
+import { IPickerInput, IIconButton } from "../components"
 
 const ResultPage = ({ navigation, route }) => {
 	let { language, codeText } = route.params
@@ -154,16 +153,26 @@ const ResultPage = ({ navigation, route }) => {
 						disableDefault={true}
 					/>
 
-					<IButton containerStyle={style.saveButton} type="abstract" onPress={downloadImage}>
+					{/* <IButton containerStyle={style.saveButton} type="abstract" onPress={downloadImage}>
 						<Icon
 							name="file-download"
 							type="font-awesome-5"
 							color="white"
 							iconStyle={style.icon}
 							containerStyle={style.saveIconContainer}
-						/>
-						<Text style={style.buttonTextStyle}>Save</Text>
-					</IButton>
+							/>
+							<Text style={style.buttonTextStyle}>Save</Text>
+					</IButton> */}
+
+					<IIconButton
+						onPress={downloadImage}
+						iconName="file-download"
+						iconPosition="end"
+						iconProps={{
+							color: "white"
+						}}>
+						Save
+					</IIconButton>
 				</View>
 			</SafeAreaView>
 		</>
@@ -200,14 +209,6 @@ const style = StyleSheet.create({
 		marginBottom: 20,
 		flexDirection: "row",
 		alignItems: "center"
-	},
-	saveIconContainer: {
-		marginRight: 10
-	},
-	buttonTextStyle: {
-		color: "white",
-		fontWeight: "500",
-		fontSize: 16
 	}
 })
 
