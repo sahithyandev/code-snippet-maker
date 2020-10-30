@@ -8,8 +8,8 @@ const ILabel = ({ children }) => {
 const style = StyleSheet.create({
 	text: {
 		fontWeight: "500",
-		color: "black",
-	},
+		color: "black"
+	}
 })
 
 export default ILabel
